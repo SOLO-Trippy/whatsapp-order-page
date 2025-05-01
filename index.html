@@ -12,6 +12,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       text-align: center;
     }
 
@@ -25,13 +26,71 @@
       border-radius: 10px;
       box-shadow: 0 0 20px #25D366;
       transition: all 0.3s ease;
+      margin-bottom: 30px;
     }
 
     .whatsapp-button:hover {
       box-shadow: 0 0 35px #25D366;
       transform: scale(1.05);
     }
+
+    .payment-section {
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .payment-section h2 {
+      margin-top: 0;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .payment-method-button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .payment-method-button:hover {
+      opacity: 0.9;
+    }
+
+    .firstcaribbean { background-color: #004990; color: white; }
+    .zelle { background-color: #6b2fb9; color: white; }
+
+    .payment-details {
+      display: none;
+      background-color: #e6ffe6;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .payment-details p {
+      margin: 8px 0;
+    }
   </style>
+  <script>
+    function showPaymentDetails(method) {
+      const sections = document.querySelectorAll('.payment-details');
+      sections.forEach(section => section.style.display = 'none');
+
+      const selected = document.getElementById(method + '-details');
+      if (selected) selected.style.display = 'block';
+    }
+  </script>
 </head>
 <body>
 
@@ -39,6 +98,33 @@
      href="https://wa.me/16492433309?text=Hi!%20I'd%20like%20to%20place%20an%20order.">
     📲 Place Order on WhatsApp
   </a>
+
+  <div class="payment-section">
+    <h2>Select Your Payment Method</h2>
+    
+    <button class="payment-method-button firstcaribbean" onclick="showPaymentDetails('firstcaribbean')">
+      Pay with CIBC FirstCaribbean
+    </button>
+    <button class="payment-method-button zelle" onclick="showPaymentDetails('zelle')">
+      Pay with Zelle
+    </button>
+
+    <!-- FIRSTCARIBBEAN DETAILS -->
+    <div id="firstcaribbean-details" class="payment-details">
+      <p><strong>Bank:</strong> CIBC FirstCaribbean</p>
+      <p><strong>Account Name:</strong> TakeAway Food</p>
+      <p><strong>Account Number:</strong> 10574038</p>
+      <p><strong>Reference:</strong> Angel</p>
+      <!-- Optional QR code -->
+      <!-- <img src="your-cibc-qr-code.png" alt="CIBC QR Code" style="max-width: 100%;"> -->
+    </div>
+
+    <!-- ZELLE DETAILS -->
+    <div id="zelle-details" class="payment-details">
+      <p><strong>Zelle:</strong> 7869673234</p>
+      <p>Send payment via your bank’s Zelle feature using the number above.</p>
+    </div>
+  </div>
 
 </body>
 </html>
